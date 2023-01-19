@@ -9,17 +9,17 @@ import java.awt.event.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class MenuScreen extends ScreenFrame implements ActionListener{
+public class GameSelectScreen extends ScreenFrame implements ActionListener{
 	//Instance variables
 	private ImageIcon bg, bgGif; //background image of menu screen and the background gif that will be put on labelGif
-	private JButton jbtPlay ,jbtInstructions, jbtScores, jbtExit; //action buttons
+	private JButton jbtInfanite ,jbtSuperJump, jbtMenu; //action buttons
 	private PaintPanel canvas; //all components are put on a PaintPanel which holds the background image
 	private JLabel heading, labelGif; //the heading label of the Main Menu and the label that will hold bgGif
 	private final Color MENU_COLOR_FG = Color.black, MENU_COLOR_BG = Color.white; //constant colors of menu button foreground and background respectively
 	private final Font MENU_FONT = new Font("Brush Script MT", Font.PLAIN, 25); //constant font of menu buttons
 	
 	//layout for MenuScreen
-	MenuScreen(){
+	GameSelectScreen(){
 		super(); //calls ScreenFrame constructor to create a new ScreenFrame
 		
 		//set a background image
@@ -30,26 +30,21 @@ public class MenuScreen extends ScreenFrame implements ActionListener{
 		this.add(canvas); //add canvas to frame
 				
 		//add a custom label for the heading
-		canvas.add(heading = addCustomLabel("Welcome to Hill Adventure", Color.black, new Font("Brush Script MT", Font.BOLD, 60)));
+		canvas.add(heading = addCustomLabel("Select gamemode", Color.black, new Font("Brush Script MT", Font.BOLD, 60)));
 		heading.setBounds(50, 25, 900, 150); //set bounds for the heading on the canvas
 		
 		//add a Play button
-		jbtPlay = addCustomButton("Play", 95, 540, 200, 80, MENU_COLOR_FG, MENU_COLOR_BG, MENU_FONT);
+		jbtInfanite = addCustomButton("Infanite mode", 195, 540, 200, 80, MENU_COLOR_FG, MENU_COLOR_BG, MENU_FONT);
 		jbtPlay.addActionListener(this); //register action listener
-		canvas.add(jbtPlay); //add to canvas
+		canvas.add(jbtInfanite); //add to canvas
 		
 		//then add the Instructions button
-		jbtInstructions = addCustomButton("Instructions", 305, 540, 200, 80, MENU_COLOR_FG, MENU_COLOR_BG, MENU_FONT);
+		jbtInstructions = addCustomButton("Superjump mode", 305, 540, 200, 80, MENU_COLOR_FG, MENU_COLOR_BG, MENU_FONT);
 		jbtInstructions.addActionListener(this); //register action listener
 		canvas.add(jbtInstructions); //add to canvas
 
-		//plus add the Scores button
-		jbtScores = addCustomButton("Scores", 515, 540, 200, 80, MENU_COLOR_FG, MENU_COLOR_BG, MENU_FONT);
-		jbtScores.addActionListener(this); //register action listener
-		canvas.add(jbtScores); //add to canvas
-
 		//and finally adding the Exit button
-		jbtExit = addCustomButton("Exit", 725, 540, 200, 80, MENU_COLOR_FG, MENU_COLOR_BG, MENU_FONT);
+		jbtExit = addCustomButton("Menu", 725, 540, 200, 80, MENU_COLOR_FG, MENU_COLOR_BG, MENU_FONT);
 		jbtExit.addActionListener(this); //register action listener
 		canvas.add(jbtExit); //add to canvas
 		
@@ -61,25 +56,20 @@ public class MenuScreen extends ScreenFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//adding different outcomes for each button to allow for multiple menu's to be accessed
-		if(e.getSource() == jbtPlay) {
+		if(e.getSource() == jbtInfanite) {
 			//create new instance of DifficultyScreen
-			// new GameSelectScreen(); Will connect once game is finished being made
+			// new InfaniteGaeModeScreen(); 
 			//this.dispose(); //get rid of current frame
 		}
-		else if(e.getSource() == jbtInstructions) {
+		else if(e.getSource() == jbtSuperJump) {
 			//create new instance of InstructionsScreen
-			new InstructionsScreen();
-			this.dispose(); //get rid of current frame
-		}
-		else if(e.getSource() == jbtScores) {
-			//create new instance of ScoreScreen
-			//new ScoreScreen();
+			//new MegaJumpGameScreen();
 			//this.dispose(); //get rid of current frame
 		}
 		//exit button exits the program
-		else if(e.getSource() == jbtExit) {
-			//exit the program
-			System.exit(0);
+		else if(e.getSource() == jbtMenu) {
+			new MenuScreen();
+			this.dispose();
 		}
 	}//end of actionPerformed method
 	
